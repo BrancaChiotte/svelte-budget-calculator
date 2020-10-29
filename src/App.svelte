@@ -56,8 +56,6 @@
   setContext("modify", setModifiedExpense);
 </script>
 
-
-
 <Navbar/>
 <main class="content">
   <ExpenseForm {addExpense} name={setName} amount={setAmount} {isEditing} {editExpense }/>
