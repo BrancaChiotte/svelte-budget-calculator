@@ -1,16 +1,30 @@
 <script>
   import Title from "./Title.svelte";
-  let name = "";
-  let amount = null;
+  export let name = "";
+  export let amount = null;
+  export let addExpense;
+  export let isEditing;
+  export let editExpense;
   // to test reactivity:
   // $: console.log({ name, amount });
   // A truthy value is considered True when encountered in boolean context.
   $: isEmpty = !name || !amount;
+  function handleSubmit() {
+    if (isEditing) {
+      editExpense ({ name, amount })
+    }
+    else {
+      addExpense({ name, amount })
+    }
+
+  name = '';
+  amount = null;
+  }
 </script>
 
 <section class="form">
   <Title title="add expense" />
-  <form class="expense-form">
+  <form class="expense-form"  on:submit|preventDefault={handleSubmit}>
     <div class="form-control">
       <label for="name"> name</label>
       <input type="text" id="name" bind:value="{name}" />
@@ -23,7 +37,8 @@
       <p class="form-empty">Please fill out all form fields</p>
     {/if }
     <button type="submit" class="btn btn-block" class:disabled={isEmpty} disabled={isEmpty}>
-      add expense
+      {#if isEditing}edit expense{:else}add expense
+      {/if}
     </button>
     <button type="button" class="close-btn">
       <i class="fas fa-times" /> close
