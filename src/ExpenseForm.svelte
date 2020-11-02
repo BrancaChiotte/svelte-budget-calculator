@@ -1,10 +1,25 @@
 <script>
+  // import { onMount, onDestroy, beforeUpdate, afterUpdate } from "svelte";
+  // onMount(() =>{
+  //   console.log("form has mounted");
+  // });
+  // beforeUpdate(() =>{
+  //   console.count("before update");
+  // });
+  // afterUpdate(() =>{
+  //   console.count("after update");
+  // });
+  // onDestroy(() =>{
+  //   console.log("form is hidden");
+  // });
   import Title from "./Title.svelte";
   export let name = "";
   export let amount = null;
   export let addExpense;
   export let isEditing;
   export let editExpense;
+  export let hideForm;
+
   // to test reactivity:
   // $: console.log({ name, amount });
   // A truthy value is considered True when encountered in boolean context.
@@ -16,9 +31,9 @@
     else {
       addExpense({ name, amount })
     }
-
   name = '';
   amount = null;
+  hideForm();
   }
 </script>
 
@@ -40,7 +55,7 @@
       {#if isEditing}edit expense{:else}add expense
       {/if}
     </button>
-    <button type="button" class="close-btn">
+    <button type="button" class="close-btn" on:click = {hideForm}>
       <i class="fas fa-times" /> close
     </button>
   </form>
