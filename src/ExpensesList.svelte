@@ -14,15 +14,15 @@
 </style>
 
 <section>
-  <SectionTitle title="expense list" />
+  <SectionTitle title="expense list:" />
   <ul>
     {#each expenses as expense, index (expense.id)}
-    <div in:fly={{ x: 200, delay: (index + 1) * 700 }} out:fly={{x-200}} animate:flip>
+    <div in:fly={{ x: 200, delay: (index + 1) * 700 }} out:fly={{x: -200}} animate:flip>
 <!--     to access the data we use ... -->
-      <Expense {...expense} />
+      <Expense {...expense} {index}/>
     </div>
       {:else}
-      <h2>no expenses added to the list</h2>
+      <h2 class="none-expense">no expenses added to the list</h2>
     {/each}
   </ul>
 </section>

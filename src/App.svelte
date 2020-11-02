@@ -4,6 +4,7 @@
   import ExpensesList from './ExpensesList.svelte';
   import Totals from './Totals.svelte';
   import ExpenseForm from './ExpenseForm.svelte';
+  // import Github from "./Github.svelte";
   import GithubAwait from "./GithubAwait.svelte";
 
   // modal
@@ -97,34 +98,18 @@
   $: console.log({ setName, setAmount });
 </script>
 
-<Navbar title="Budget Calculator" {showForm} />
+<Navbar {showForm} />
 <main class="content">
+  <!-- <Github /> -->
   <!-- <GithubAwait /> -->
   {#if isFormOpen}
     <Modal>
-      <ExpenseForm bind:name={setName} bind:amount={setAmount} {addExpense} {editExpense} {isEditing} {hideForm} />
+      <ExpenseForm name={setName} amount={setAmount} {addExpense} {editExpense} {isEditing} {hideForm} />
     </Modal>
   {/if}
   <Totals title="total expenses" {total} />
-  <ExpenseList {expenses} />
+  <ExpensesList {expenses} />
   <button type="button" class="btn btn-primary btn-block" on:click={clearExpenses}>
     clear expenses
   </button>
 </main>
-
-
-<!--
-<Navbar {showForm}/>
-<main class="content">
-  {#if isFormOpen}
-    <Modal>
-      <ExpenseForm {addExpense} name={setName} amount={setAmount} {isEditing} {editExpense } {hideForm}/>
-    </Modal>
-  {/if}
-  <Totals title="total expenses" {total} />
-  <ExpensesList {expenses}/>
-  <button type="button" class="btn btn-primary btn-block" on:click={clearExpenses}>
-    clear expenses
-  </button>
-</main> -->
-

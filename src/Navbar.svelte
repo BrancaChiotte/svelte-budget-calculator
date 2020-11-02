@@ -1,7 +1,6 @@
 <script>
-  export let showForm;
+  export let showForm = () => {};
 </script>
-
 
 
 <nav class="nav">
